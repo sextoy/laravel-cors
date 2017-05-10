@@ -58,7 +58,7 @@ class HandleCors
                 $this->addHeaders($request, $response);
             });
         }
-
+        dd('cors!');
         $response = $next($request);
 
         return $this->addHeaders($request, $response);

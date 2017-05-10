@@ -33,14 +33,18 @@ class HandleCors
     public function handle($request, Closure $next)
     {
         if (! $this->cors->isCorsRequest($request)) {
+            dump($request->header('Origin'));
+            dd('NOT CORS REQUEST');
             return $next($request);
         }
 
         if ($this->cors->isPreflightRequest($request)) {
+            dd('PREFLIGHT REQUEST');
             return $this->cors->handlePreflightRequest($request);
         }
 
         if (! $this->cors->isActualRequestAllowed($request)) {
+            dd('NOT ALLOWED');
             return new Response('Not allowed.', 403);
         }
 
